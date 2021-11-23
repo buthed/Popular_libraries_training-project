@@ -10,9 +10,11 @@ class MainActivity : AppCompatActivity() {
     private val binding
         get() = _binding!!
 
+    val counters = mutableListOf(0, 0, 0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
     }
 }
