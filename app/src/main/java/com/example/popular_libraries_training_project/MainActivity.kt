@@ -18,19 +18,21 @@ class MainActivity : AppCompatActivity(), MainView {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val listner = View.OnClickListener { view ->
-            presenter.counterClick(view.id)
-        }
 
-        binding.btnCounter1.setOnClickListener(listner)
-        binding.btnCounter2.setOnClickListener(listner)
-        binding.btnCounter3.setOnClickListener(listner)
+        binding.btnCounter1.setOnClickListener { presenter.counterClickButton1() }
+        binding.btnCounter2.setOnClickListener { presenter.counterClickButton2() }
+        binding.btnCounter3.setOnClickListener { presenter.counterClickButton3() }
     }
 
-    override fun setButtonText(index: Int, text: String) = when(index) { //TODO Homework
-        0 -> binding.btnCounter1.text = text
-        1 -> binding.btnCounter2.text = text
-        2 -> binding.btnCounter3.text = text
-        else -> error("Неверный индекс")
+    override fun setButtonText1(text: String) {
+        binding.btnCounter1.text = text
+    }
+
+    override fun setButtonText2(text: String) {
+        binding.btnCounter2.text = text
+    }
+
+    override fun setButtonText3(text: String) {
+        binding.btnCounter3.text = text
     }
 }
