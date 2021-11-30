@@ -8,17 +8,17 @@ class MainPresenter(
 
 
     fun counterClickButton1() {
-        val nextValue = model.increment(0)
+        val nextValue = model.increment1()
         view.setButtonText1(nextValue.toString())
     }
 
     fun counterClickButton2() {
-        val nextValue = model.increment(1)
+        val nextValue = model.increment2()
         view.setButtonText2(nextValue.toString())
     }
 
     fun counterClickButton3() {
-        val nextValue = model.increment(2)
+        val nextValue = model.increment3()
         view.setButtonText3(nextValue.toString())
     }
 
