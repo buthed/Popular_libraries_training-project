@@ -4,7 +4,7 @@ import com.example.popular_libraries_training_project.ui.users.UserItemView
 
 interface IListPresenter<V: IItemView> {
 
-    var itemClickListener: () -> Unit
+    var itemClickListener: (UserItemView) -> Unit
 
     fun getCount(): Int
 

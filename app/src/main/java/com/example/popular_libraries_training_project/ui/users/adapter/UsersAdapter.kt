@@ -2,12 +2,8 @@ package com.example.popular_libraries_training_project.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popular_libraries_training_project.databinding.ItemUserBinding
-import com.example.popular_libraries_training_project.model.GithubUserModel
-import com.example.popular_libraries_training_project.ui.base.IListPresenter
 import com.example.popular_libraries_training_project.ui.users.UserItemView
 import com.example.popular_libraries_training_project.ui.users.UsersPresenter
 
@@ -18,7 +14,7 @@ class UsersAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         ).apply {
-            itemView.setOnClickListener { presenter.itemClickListener() }
+            itemView.setOnClickListener { presenter.itemClickListener.invoke(this) }
         }
     }
 
