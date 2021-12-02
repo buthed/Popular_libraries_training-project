@@ -3,9 +3,11 @@ package com.example.popular_libraries_training_project.ui.users
 import com.example.popular_libraries_training_project.domain.GithubUsersRepository
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.ui.base.IListPresenter
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
 class UsersPresenter(
+    private val router: Router,
     private val usersRepository: GithubUsersRepository
 ): MvpPresenter<UsersView>(){
 
@@ -23,6 +25,11 @@ class UsersPresenter(
         val users = usersRepository.getUsers()
         usersListPresenter.users.addAll(users)
         viewState.updateList()
+    }
+
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
     }
 
     class UsersListPresenter: IListPresenter<UserItemView> {
