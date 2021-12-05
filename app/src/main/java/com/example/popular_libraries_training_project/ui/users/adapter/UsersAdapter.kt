@@ -2,36 +2,43 @@ package com.example.popular_libraries_training_project.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popular_libraries_training_project.databinding.ItemUserBinding
-import com.example.popular_libraries_training_project.ui.users.UserItemView
-import com.example.popular_libraries_training_project.ui.users.UsersPresenter
+import com.example.popular_libraries_training_project.model.GithubUserModel
 
 class UsersAdapter(
-    private val presenter: UsersPresenter.UsersListPresenter
-): RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val itemClickListener: (GithubUserModel) -> Unit,
+) : ListAdapter<GithubUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return UserViewHolder(ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        ).apply {
-            itemView.setOnClickListener { presenter.itemClickListener.invoke(this) }
-        }
+        return UserViewHolder(
+            ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        presenter.bindView(holder.apply { pos = position })
+        holder.showUser(currentList[position])
     }
 
-    override fun getItemCount(): Int {
-        return presenter.getCount()
-    }
+    inner class UserViewHolder(private val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root) {
 
-    inner class UserViewHolder(val vb: ItemUserBinding): RecyclerView.ViewHolder(vb.root), UserItemView {
+        fun showUser(user: GithubUserModel) {
+            vb.root.setOnClickListener { itemClickListener(user) }
 
-        override var pos: Int = -1
-
-        override fun setLogin(login: String) {
-            vb.tvLogin.text = login
+            vb.tvLogin.text = user.login
         }
+    }
+}
+
+object GithubUserItemCallback : DiffUtil.ItemCallback<GithubUserModel>() {
+
+    override fun areItemsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+        return oldItem == newItem
     }
 }
