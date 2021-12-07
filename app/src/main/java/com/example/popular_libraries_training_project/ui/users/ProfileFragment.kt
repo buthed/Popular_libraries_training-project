@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.databinding.FragmentProfileBinding
+import com.example.popular_libraries_training_project.model.GithubUserModel
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class ProfileFragment(private val login: String) : MvpAppCompatFragment(), ProfileView{
+class ProfileFragment(private val user: GithubUserModel) : MvpAppCompatFragment(), ProfileView{
 
     private val presenter by moxyPresenter { ProfilePresenter(App.Companion.instance.router) }
 
@@ -25,6 +26,6 @@ class ProfileFragment(private val login: String) : MvpAppCompatFragment(), Profi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.userName.text = login
+        binding.userName.text = user.login
     }
 }
