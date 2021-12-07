@@ -36,6 +36,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
         binding.usersRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.usersRecycler.adapter = adapter
+
     }
 
     override fun updateList(users: List<GithubUserModel>) {
