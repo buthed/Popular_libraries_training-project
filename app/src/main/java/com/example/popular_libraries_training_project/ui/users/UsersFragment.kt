@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.databinding.FragmentUsersBinding
 import com.example.popular_libraries_training_project.domain.GithubUsersRepository
+import com.example.popular_libraries_training_project.domain.GithubUsersRepositoryImpl
 import com.example.popular_libraries_training_project.model.GithubUserModel
+import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
 import com.example.popular_libraries_training_project.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
@@ -16,7 +18,10 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val presenter by moxyPresenter { UsersPresenter(App.Companion.instance.router, GithubUsersRepository()) }
+    private val presenter by moxyPresenter { UsersPresenter(
+        App.instance.router,
+        GithubUsersRepositoryImpl(ApiHolder.retrofitService),
+    ) }
 
     private var _binding: FragmentUsersBinding? = null
     private val binding

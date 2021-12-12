@@ -21,13 +21,14 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        val service = ApiHolder.retrofitService
-        service.getUsers()
+        usersRepository.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { users: List<GithubUserModel> ->
-                Log.d("Retrofit", "Первый пользователь: ${users.firstOrNull()?.login}")
-            }
+            .subscribe({ users->
+                       viewState.updateList(users)
+            },{ e->
+                Log.e("Retrofit", "Ошибка при получении пользователей", e)
+            })
     }
 
     fun onUserClicked(userModel: GithubUserModel) {
