@@ -2,14 +2,17 @@ package com.example.popular_libraries_training_project.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popular_libraries_training_project.databinding.ItemUserBinding
 import com.example.popular_libraries_training_project.model.GithubUserModel
+import com.example.popular_libraries_training_project.ui.imageloading.ImageLoader
 
 class UsersAdapter(
     private val itemClickListener: (GithubUserModel) -> Unit,
+    private val imageLoader: ImageLoader<ImageView>
 ) : ListAdapter<GithubUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -28,6 +31,7 @@ class UsersAdapter(
             vb.root.setOnClickListener { itemClickListener(user) }
 
             vb.tvLogin.text = user.login
+            imageLoader.loadInto(user.avatarUrl, vb.userImage)
         }
     }
 }

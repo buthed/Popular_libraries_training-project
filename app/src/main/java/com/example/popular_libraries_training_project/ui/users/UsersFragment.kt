@@ -12,6 +12,7 @@ import com.example.popular_libraries_training_project.domain.GithubUsersReposito
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
+import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader
 import com.example.popular_libraries_training_project.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
@@ -28,7 +29,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val adapter by lazy {
-        UsersAdapter(presenter::onUserClicked)
+        UsersAdapter(
+            presenter::onUserClicked,
+            GlideImageLoader()
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
