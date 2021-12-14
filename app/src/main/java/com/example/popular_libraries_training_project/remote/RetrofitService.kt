@@ -12,5 +12,8 @@ interface RetrofitService {
     fun getUsers(): Single<List<GithubUserModel>>
 
     @GET
-    fun getRepos(@Url reposUrl: String): Single<List<GithubReposModel>>
+    fun getRepositories(@Url reposUrl: String): Single<List<GithubReposModel>>
+
+    @GET
+    fun getRepository(githubReposModel: GithubReposModel): Single<GithubReposModel>
 }

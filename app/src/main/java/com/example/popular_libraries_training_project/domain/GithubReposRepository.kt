@@ -5,6 +5,8 @@ import io.reactivex.rxjava3.core.Single
 
 interface GithubReposRepository {
 
-    fun getRepos(reposUrl: String): Single<List<GithubReposModel>>
+    fun getRepositories(reposUrl: String): Single<List<GithubReposModel>>
+
+    fun getRepository(githubReposModel: GithubReposModel): Single<GithubReposModel>
 }
 

@@ -1,35 +1,38 @@
-package com.example.popular_libraries_training_project.ui.users
+package com.example.popular_libraries_training_project.ui.repositories
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
-import com.example.popular_libraries_training_project.databinding.FragmentProfileBinding
+import com.example.popular_libraries_training_project.databinding.FragmentRepositoriesBinding
 import com.example.popular_libraries_training_project.domain.GithubReposRepositoryImpl
-import com.example.popular_libraries_training_project.domain.GithubUsersRepositoryImpl
 import com.example.popular_libraries_training_project.model.GithubReposModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
+import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader
+import com.example.popular_libraries_training_project.ui.imageloading.ImageLoader
 import com.example.popular_libraries_training_project.ui.users.adapter.ReposAdapter
-import com.example.popular_libraries_training_project.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class ProfileFragment(
-    private val user: GithubUserModel
-    ) : MvpAppCompatFragment(), ProfileView, BackButtonListener {
+class RepositoriesFragment(
+    private val user: GithubUserModel,
+    ) : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
-    private val presenter by moxyPresenter { ProfilePresenter(
+    private val presenter by moxyPresenter { RepositoriesPresenter(
         App.instance.router,
         GithubReposRepositoryImpl(ApiHolder.retrofitService),
         user
     ) }
 
-    private var _binding: FragmentProfileBinding? = null
+
+    private val imageloader by lazy { GlideImageLoader() }
+    private var _binding: FragmentRepositoriesBinding? = null
     private val binding
         get() = _binding!!
 
@@ -40,7 +43,7 @@ class ProfileFragment(
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,6 +52,9 @@ class ProfileFragment(
 
         binding.reposRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.reposRecycler.adapter = adapter
+
+        binding.userLogin.text = user.login
+        imageloader.loadInto(user.avatarUrl, binding.userImage)
     }
 
     override fun updateList(repos: List<GithubReposModel>) {
@@ -56,13 +62,13 @@ class ProfileFragment(
     }
 
     override fun showLoading() {
-        binding.loadingViewRepos.isVisible = true
-        binding.userName.isVisible = false
+        binding.loadingViewRepositories.isVisible = true
+        binding.reposRecycler.isVisible = false
     }
 
     override fun hideLoading() {
-        binding.loadingViewRepos.isVisible = false
-        binding.userName.isVisible = true
+        binding.loadingViewRepositories.isVisible = false
+        binding.reposRecycler.isVisible = true
     }
 
     override fun backPressed(): Boolean {

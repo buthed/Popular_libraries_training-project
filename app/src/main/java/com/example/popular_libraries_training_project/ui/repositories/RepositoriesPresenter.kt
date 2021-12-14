@@ -1,8 +1,7 @@
-package com.example.popular_libraries_training_project.ui.users
+package com.example.popular_libraries_training_project.ui.repositories
 
 import android.util.Log
 import com.example.popular_libraries_training_project.domain.GithubReposRepository
-import com.example.popular_libraries_training_project.domain.GithubUsersRepository
 import com.example.popular_libraries_training_project.model.GithubReposModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.screens.AppScreens
@@ -11,11 +10,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class ProfilePresenter(
+class RepositoriesPresenter(
     private val router: Router,
     private val githubReposRepository: GithubReposRepository,
     private val githubUserModel: GithubUserModel
-): MvpPresenter<ProfileView>(){
+): MvpPresenter<RepositoriesView>(){
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -24,7 +23,7 @@ class ProfilePresenter(
     }
 
     private fun loadData() {
-        githubReposRepository.getRepos(githubUserModel.reposUrl)
+        githubReposRepository.getRepositories(githubUserModel.reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe{viewState.showLoading()}
@@ -39,7 +38,7 @@ class ProfilePresenter(
     }
 
     fun onReposClicked(reposModel: GithubReposModel) {
-        //TODO
+        router.navigateTo(AppScreens.repositoryDetails(githubUserModel, reposModel))
     }
 
     fun backPressed(): Boolean {

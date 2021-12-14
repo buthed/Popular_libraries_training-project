@@ -31,6 +31,7 @@ class ReposAdapter(
         fun showRepos(repos: GithubReposModel) {
             vb.root.setOnClickListener { itemClickListener(repos) }
             vb.reposName.text = repos.name
+            vb.reposCreated.text = repos.createdAt
         }
     }
 }

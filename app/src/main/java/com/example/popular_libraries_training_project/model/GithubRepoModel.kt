@@ -5,4 +5,14 @@ import com.google.gson.annotations.Expose
 data class GithubReposModel (
     @Expose
     val name: String,
+
+    @Expose
+    val forks: Int,
+
+    @Expose
+    val watchers: Int,
+
+    @Expose
+    val createdAt: String,
+
 )
