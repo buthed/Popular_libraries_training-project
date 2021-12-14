@@ -11,7 +11,7 @@ class MainPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        router.navigateTo(AppScreens.userScreen())
+        router.navigateTo(AppScreens.photoConverter())
     }
 
     fun backPressed() {
