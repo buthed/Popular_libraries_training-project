@@ -38,7 +38,7 @@ class RepositoriesPresenter(
     }
 
     fun onReposClicked(reposModel: GithubReposModel) {
-        router.navigateTo(AppScreens.repositoryDetails(githubUserModel, reposModel))
+        router.navigateTo(AppScreens.repositoryDetails(githubUserModel, reposModel, githubReposRepository))
     }
 
     fun backPressed(): Boolean {

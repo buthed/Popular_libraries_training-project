@@ -8,12 +8,12 @@ class GithubReposRepositoryImpl(
     private  val retrofitService: RetrofitService,
 ): GithubReposRepository {
 
-    override fun getRepositories(reposUrl: String): Single<List<GithubReposModel>> {
-        return retrofitService.getRepositories(reposUrl)
+    override fun getRepositories(repositoriesUrl: String): Single<List<GithubReposModel>> {
+        return retrofitService.getRepositories(repositoriesUrl)
     }
 
-    override fun getRepository(githubReposModel: GithubReposModel): Single<GithubReposModel> {
-        return retrofitService.getRepository(githubReposModel)
+    override fun getRepository(repositoryUrl: String): Single<GithubReposModel> {
+        return retrofitService.getRepository(repositoryUrl)
     }
 
 }

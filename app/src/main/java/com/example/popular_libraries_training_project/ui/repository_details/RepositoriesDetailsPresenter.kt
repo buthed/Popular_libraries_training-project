@@ -12,29 +12,29 @@ import moxy.MvpPresenter
 class RepositoriesDetailsPresenter(
     private val router: Router,
     private val githubReposModel: GithubReposModel,
+    private val githubReposRepository: GithubReposRepository
 ): MvpPresenter<RepositoryDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-//        loadData()
-        viewState.updateRepository(githubReposModel) //TODO
+        loadData()
     }
 
-//    private fun loadData() {
-//        githubReposRepository.getRepository(githubReposModel)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .doOnSubscribe{viewState.showLoading()}
-//            .subscribe(
-//                { repository->
-//                    viewState.updateList(repository)
-//                    viewState.hideLoading()
-//                },{ e->
-//                    Log.e("Retrofit", "Ошибка при получении пользователей", e)
-//                    viewState.hideLoading()
-//                })
-//    }
+    private fun loadData() {
+        githubReposRepository.getRepository(githubReposModel.url)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe{viewState.showLoading()}
+            .subscribe(
+                { repository->
+                    viewState.updateRepository(repository)
+                    viewState.hideLoading()
+                },{ e->
+                    Log.e("Retrofit", "Ошибка при получении пользователей", e)
+                    viewState.hideLoading()
+                })
+    }
 
 
 

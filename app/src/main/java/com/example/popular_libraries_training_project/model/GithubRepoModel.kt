@@ -2,7 +2,7 @@ package com.example.popular_libraries_training_project.model
 
 import com.google.gson.annotations.Expose
 
-data class GithubReposModel (
+data class GithubReposModel(
     @Expose
     val name: String,
 
@@ -15,4 +15,9 @@ data class GithubReposModel (
     @Expose
     val createdAt: String,
 
+    @Expose
+    val openIssues: Int,
+
+    @Expose
+    val url: String
 )
