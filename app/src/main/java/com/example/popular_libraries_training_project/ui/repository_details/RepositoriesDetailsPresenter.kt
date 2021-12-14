@@ -1,18 +1,18 @@
-package com.example.popular_libraries_training_project.ui.users
+package com.example.popular_libraries_training_project.ui.repository_details
 
 import android.util.Log
-import com.example.popular_libraries_training_project.domain.GithubUsersRepository
-import com.example.popular_libraries_training_project.model.GithubUserModel
-import com.example.popular_libraries_training_project.screens.AppScreens
+import com.example.popular_libraries_training_project.domain.GithubReposRepository
+import com.example.popular_libraries_training_project.model.GithubReposModel
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class UsersPresenter(
+class RepositoriesDetailsPresenter(
     private val router: Router,
-    private val usersRepository: GithubUsersRepository
-) : MvpPresenter<UsersView>() {
+    private val githubReposModel: GithubReposModel,
+    private val githubReposRepository: GithubReposRepository
+) : MvpPresenter<RepositoryDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -21,22 +21,18 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepository.getUsers()
+        githubReposRepository.getRepository(githubReposModel.url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
             .subscribe(
-                { users ->
-                    viewState.updateList(users)
+                { repository ->
+                    viewState.updateRepository(repository)
                     viewState.hideLoading()
                 }, { e ->
                     Log.e("Retrofit", "Ошибка при получении пользователей", e)
                     viewState.hideLoading()
                 })
-    }
-
-    fun onUserClicked(userModel: GithubUserModel) {
-        router.navigateTo(AppScreens.userRepositories(userModel))
     }
 
     fun backPressed(): Boolean {

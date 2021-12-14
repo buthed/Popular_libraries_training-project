@@ -4,7 +4,7 @@ import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 
-class App: Application() {
+class App : Application() {
 
     private val cicerone: Cicerone<Router> by lazy {
         Cicerone.create()
@@ -21,6 +21,7 @@ class App: Application() {
     }
 
     companion object {
+
         private var _instance: App? = null
         val instance
             get() = _instance!!

@@ -8,18 +8,21 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/userImage"
-        tools:src="@color/black"
-        android:layout_width="64dp"
-        android:layout_height="64dp" />
-
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/reposName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/black"
-        tools:text="Имя пользователя" />
+        tools:text="Имя репозитория" />
+
+    <TextView
+        android:id="@+id/reposCreated"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:gravity="right"
+        android:textColor="@color/black"
+        tools:text="2021-2-2" />
 
 </LinearLayout>

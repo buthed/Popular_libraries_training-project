@@ -1,7 +1,8 @@
-package com.example.popular_libraries_training_project.ui.users
+package com.example.popular_libraries_training_project.ui.repositories
 
 import android.util.Log
-import com.example.popular_libraries_training_project.domain.GithubUsersRepository
+import com.example.popular_libraries_training_project.domain.GithubReposRepository
+import com.example.popular_libraries_training_project.model.GithubReposModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.screens.AppScreens
 import com.github.terrakok.cicerone.Router
@@ -9,10 +10,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class UsersPresenter(
+class RepositoriesPresenter(
     private val router: Router,
-    private val usersRepository: GithubUsersRepository
-) : MvpPresenter<UsersView>() {
+    private val githubReposRepository: GithubReposRepository,
+    private val githubUserModel: GithubUserModel
+) : MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -21,7 +23,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        usersRepository.getUsers()
+        githubReposRepository.getRepositories(githubUserModel.reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
@@ -35,12 +37,18 @@ class UsersPresenter(
                 })
     }
 
-    fun onUserClicked(userModel: GithubUserModel) {
-        router.navigateTo(AppScreens.userRepositories(userModel))
+    fun onReposClicked(reposModel: GithubReposModel) {
+        router.navigateTo(
+            AppScreens.repositoryDetails(
+                githubUserModel,
+                reposModel,
+                githubReposRepository
+            )
+        )
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+        router.backTo(AppScreens.userScreen())
         return true
     }
 }
