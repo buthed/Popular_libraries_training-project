@@ -7,4 +7,3 @@ interface GithubUsersRepository {
 
     fun getUsers(): Single<List<GithubUserModel>>
 }
-

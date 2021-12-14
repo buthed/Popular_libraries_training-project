@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/repositoryName"
-        tools:text="Forks"/>
+        tools:text="Forks" />
 
     <TextView
         android:id="@+id/repositoryWatchers"
@@ -56,8 +56,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/repositoryForks"
-        tools:text="Watchers"/>
-
+        tools:text="Watchers" />
 
 
     <TextView
@@ -66,7 +65,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/repositoryWatchers"
-        tools:text="Open Issues"/>
+        tools:text="Open Issues" />
 
     <ProgressBar
         android:id="@+id/loadingViewRepositoryDetails"

@@ -4,7 +4,7 @@ import com.example.popular_libraries_training_project.model.GithubReposModel
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
-interface RepositoryDetailsView: MvpView {
+interface RepositoryDetailsView : MvpView {
 
     @AddToEndSingle
     fun updateRepository(repository: GithubReposModel)

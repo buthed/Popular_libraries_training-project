@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
@@ -15,21 +14,21 @@ import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
 import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader
-import com.example.popular_libraries_training_project.ui.imageloading.ImageLoader
 import com.example.popular_libraries_training_project.ui.users.adapter.ReposAdapter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 class RepositoriesFragment(
     private val user: GithubUserModel,
-    ) : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
+) : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
-    private val presenter by moxyPresenter { RepositoriesPresenter(
-        App.instance.router,
-        GithubReposRepositoryImpl(ApiHolder.retrofitService),
-        user
-    ) }
-
+    private val presenter by moxyPresenter {
+        RepositoriesPresenter(
+            App.instance.router,
+            GithubReposRepositoryImpl(ApiHolder.retrofitService),
+            user
+        )
+    }
 
     private val imageloader by lazy { GlideImageLoader() }
     private var _binding: FragmentRepositoriesBinding? = null
@@ -42,7 +41,11 @@ class RepositoriesFragment(
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentRepositoriesBinding.inflate(inflater, container, false)
         return binding.root
     }

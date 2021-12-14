@@ -19,10 +19,12 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val presenter by moxyPresenter { UsersPresenter(
-        App.instance.router,
-        GithubUsersRepositoryImpl(ApiHolder.retrofitService),
-    ) }
+    private val presenter by moxyPresenter {
+        UsersPresenter(
+            App.instance.router,
+            GithubUsersRepositoryImpl(ApiHolder.retrofitService),
+        )
+    }
 
     private var _binding: FragmentUsersBinding? = null
     private val binding
@@ -35,7 +37,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
     }

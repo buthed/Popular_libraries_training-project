@@ -18,9 +18,11 @@ object AppScreens {
         RepositoriesFragment(userName)
     }
 
-    fun repositoryDetails(user: GithubUserModel, model: GithubReposModel, repository: GithubReposRepository) = FragmentScreen {
+    fun repositoryDetails(
+        user: GithubUserModel,
+        model: GithubReposModel,
+        repository: GithubReposRepository
+    ) = FragmentScreen {
         RepositoriesDetailsFragment(user, model, repository)
     }
-
-
 }

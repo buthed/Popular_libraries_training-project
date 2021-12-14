@@ -19,7 +19,7 @@ class RepositoriesDetailsFragment(
     private val user: GithubUserModel,
     private val githubReposModel: GithubReposModel,
     private val githubReposRepository: GithubReposRepository,
-): MvpAppCompatFragment(), RepositoryDetailsView, BackButtonListener {
+) : MvpAppCompatFragment(), RepositoryDetailsView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         RepositoriesDetailsPresenter(
@@ -34,7 +34,11 @@ class RepositoriesDetailsFragment(
     private val binding
         get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentRepositoryDetailesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,7 +58,7 @@ class RepositoriesDetailsFragment(
     override fun updateRepository(repository: GithubReposModel) {
         binding.repositoryName.text = repository.name
         binding.repositoryForks.text = "Forks:" + repository.forks.toString()
-        binding.repositoryWatchers.text = "Watchers: " +repository.watchers.toString()
+        binding.repositoryWatchers.text = "Watchers: " + repository.watchers.toString()
         binding.repositoryIssues.text = "Open Issues:" + repository.openIssues.toString()
     }
 

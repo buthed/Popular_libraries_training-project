@@ -12,7 +12,7 @@
         android:id="@+id/userImage"
         tools:src="@color/black"
         android:layout_width="64dp"
-        android:layout_height="64dp"/>
+        android:layout_height="64dp" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/black"
-        tools:text="Имя пользователя"/>
+        tools:text="Имя пользователя" />
 
 </LinearLayout>

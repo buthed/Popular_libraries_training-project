@@ -14,7 +14,7 @@ class RepositoriesPresenter(
     private val router: Router,
     private val githubReposRepository: GithubReposRepository,
     private val githubUserModel: GithubUserModel
-): MvpPresenter<RepositoriesView>(){
+) : MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -26,23 +26,29 @@ class RepositoriesPresenter(
         githubReposRepository.getRepositories(githubUserModel.reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe{viewState.showLoading()}
+            .doOnSubscribe { viewState.showLoading() }
             .subscribe(
-                { users->
+                { users ->
                     viewState.updateList(users)
                     viewState.hideLoading()
-                },{ e->
+                }, { e ->
                     Log.e("Retrofit", "Ошибка при получении пользователей", e)
                     viewState.hideLoading()
                 })
     }
 
     fun onReposClicked(reposModel: GithubReposModel) {
-        router.navigateTo(AppScreens.repositoryDetails(githubUserModel, reposModel, githubReposRepository))
+        router.navigateTo(
+            AppScreens.repositoryDetails(
+                githubUserModel,
+                reposModel,
+                githubReposRepository
+            )
+        )
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+        router.backTo(AppScreens.userScreen())
         return true
     }
 }

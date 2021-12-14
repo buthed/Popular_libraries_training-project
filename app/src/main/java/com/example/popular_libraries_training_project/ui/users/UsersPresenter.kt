@@ -12,7 +12,7 @@ import moxy.MvpPresenter
 class UsersPresenter(
     private val router: Router,
     private val usersRepository: GithubUsersRepository
-): MvpPresenter<UsersView>(){
+) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -24,12 +24,12 @@ class UsersPresenter(
         usersRepository.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe{viewState.showLoading()}
+            .doOnSubscribe { viewState.showLoading() }
             .subscribe(
-                { users->
+                { users ->
                     viewState.updateList(users)
                     viewState.hideLoading()
-                },{ e->
+                }, { e ->
                     Log.e("Retrofit", "Ошибка при получении пользователей", e)
                     viewState.hideLoading()
                 })

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textColor="@color/black"
-        tools:text="Имя репозитория"/>
+        tools:text="Имя репозитория" />
 
     <TextView
         android:id="@+id/reposCreated"
