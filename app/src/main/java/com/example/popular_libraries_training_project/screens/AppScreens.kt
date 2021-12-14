@@ -25,8 +25,4 @@ object AppScreens {
     ) = FragmentScreen {
         RepositoriesDetailsFragment(user, model, repository)
     }
-
-    fun photoConverter() = FragmentScreen {
-        ConverterFragment()
-    }
 }
