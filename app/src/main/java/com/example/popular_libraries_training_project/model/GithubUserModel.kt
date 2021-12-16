@@ -12,3 +12,4 @@ data class GithubUserModel(
     @Expose
     val reposUrl: String,
 )
+
