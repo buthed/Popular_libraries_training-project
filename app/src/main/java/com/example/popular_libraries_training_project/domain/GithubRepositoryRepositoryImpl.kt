@@ -2,6 +2,7 @@ package com.example.popular_libraries_training_project.domain
 
 import com.example.popular_libraries_training_project.db.AppDatabase
 import com.example.popular_libraries_training_project.db.model.RoomGithubRepository
+import com.example.popular_libraries_training_project.db.model.RoomGithubUser
 import com.example.popular_libraries_training_project.model.GithubRepoOwner
 import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
@@ -16,7 +17,7 @@ class GithubRepositoryRepositoryImpl(
 ) : GithubRepositoryRepository {
 
     override fun getRepositories(userModel: GithubUserModel): Single<List<GithubRepositoryModel>> {
-        return if (networkStatus.isOnline()) {
+        return if (networkStatus.isOnline())  {
             retrofitService.getRepositories(userModel.reposUrl)
                 .flatMap { repos ->
                     Single.fromCallable {

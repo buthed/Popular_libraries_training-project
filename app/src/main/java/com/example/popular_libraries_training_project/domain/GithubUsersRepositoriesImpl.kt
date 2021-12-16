@@ -1,17 +1,19 @@
 package com.example.popular_libraries_training_project.domain
 
+import androidx.room.Database
 import com.example.popular_libraries_training_project.db.AppDatabase
+import com.example.popular_libraries_training_project.db.model.RoomGithubRepository
 import com.example.popular_libraries_training_project.db.model.RoomGithubUser
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import io.reactivex.rxjava3.core.Single
 
-class GithubUsersRepositoryImpl(
+class GithubUsersRepositoriesImpl(
     private val networkStatus: NetworkStatus,
     private val retrofitService: RetrofitService,
     private val db: AppDatabase,
-) : GithubUsersRepository {
+) : GithubUsersRepositories {
 
     override fun getUsers(): Single<List<GithubUserModel>> {
         return if (networkStatus.isOnline()) {
