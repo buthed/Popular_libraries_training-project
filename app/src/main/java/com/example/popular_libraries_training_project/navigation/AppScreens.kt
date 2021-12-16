@@ -1,4 +1,4 @@
-package com.example.popular_libraries_training_project.screens
+package com.example.popular_libraries_training_project.navigation
 
 import com.example.popular_libraries_training_project.domain.GithubReposRepository
 import com.example.popular_libraries_training_project.model.GithubReposModel
