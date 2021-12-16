@@ -12,6 +12,9 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: RoomGithubUser)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(user: List<RoomGithubUser>)
+
     @Query("SELECT * FROM RoomGithubUser")
     fun getAll(): List<RoomGithubUser>
 

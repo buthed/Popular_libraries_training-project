@@ -1,6 +1,7 @@
 package com.example.popular_libraries_training_project.ui.users
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.databinding.FragmentUsersBinding
+import com.example.popular_libraries_training_project.db.AppDatabase
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositoryImpl
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.ApiHolder
+import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
 import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader
 import com.example.popular_libraries_training_project.ui.users.adapter.UsersAdapter
@@ -22,7 +25,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val presenter by moxyPresenter {
         UsersPresenter(
             App.instance.router,
-            GithubUsersRepositoryImpl(ApiHolder.retrofitService),
+            GithubUsersRepositoryImpl(
+                networkStatus = status,
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance,
+            ),
         )
     }
 
@@ -36,6 +43,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
             GlideImageLoader()
         )
     }
+
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +60,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
         binding.usersRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.usersRecycler.adapter = adapter
+
+        status.getNetworkSubject()
+            .subscribe {
+                Log.d("RxJava", "Состояние сети: $it")
+            }
     }
 
     override fun updateList(users: List<GithubUserModel>) {

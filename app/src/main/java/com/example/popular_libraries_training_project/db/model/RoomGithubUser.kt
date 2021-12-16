@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class RoomGithubUser(
-    @PrimaryKey val id: String,
+    @PrimaryKey val id: Int,
     val login: String,
     val avatarUrl: String,
     val reposUrl: String,
