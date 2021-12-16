@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popular_libraries_training_project.databinding.ItemReposBinding
-import com.example.popular_libraries_training_project.model.GithubReposModel
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 
 class ReposAdapter(
-    private val itemClickListener: (GithubReposModel) -> Unit,
-) : ListAdapter<GithubReposModel, ReposAdapter.ReposViewHolder>(GithubReposItemCallback) {
+    private val itemClickListener: (GithubRepositoryModel) -> Unit,
+) : ListAdapter<GithubRepositoryModel, ReposAdapter.ReposViewHolder>(GithubReposItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReposViewHolder {
         return ReposViewHolder(
@@ -25,21 +25,27 @@ class ReposAdapter(
     inner class ReposViewHolder(private val vb: ItemReposBinding) :
         RecyclerView.ViewHolder(vb.root) {
 
-        fun showRepos(repos: GithubReposModel) {
-            vb.root.setOnClickListener { itemClickListener(repos) }
-            vb.reposName.text = repos.name
-            vb.reposCreated.text = repos.createdAt
+        fun showRepos(repository: GithubRepositoryModel) {
+            vb.root.setOnClickListener { itemClickListener(repository) }
+            vb.reposName.text = repository.name
+            vb.reposCreated.text = repository.createdAt
         }
     }
 }
 
-object GithubReposItemCallback : DiffUtil.ItemCallback<GithubReposModel>() {
+object GithubReposItemCallback : DiffUtil.ItemCallback<GithubRepositoryModel>() {
 
-    override fun areItemsTheSame(oldItem: GithubReposModel, newItem: GithubReposModel): Boolean {
+    override fun areItemsTheSame(
+        oldItem: GithubRepositoryModel,
+        newItem: GithubRepositoryModel
+    ): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: GithubReposModel, newItem: GithubReposModel): Boolean {
+    override fun areContentsTheSame(
+        oldItem: GithubRepositoryModel,
+        newItem: GithubRepositoryModel
+    ): Boolean {
         return oldItem == newItem
     }
 }

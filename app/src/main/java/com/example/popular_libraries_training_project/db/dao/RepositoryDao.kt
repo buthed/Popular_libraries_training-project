@@ -8,14 +8,17 @@ import com.example.popular_libraries_training_project.db.model.RoomGithubReposit
 
 @Dao
 interface RepositoryDao {
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insert(user: RoomGithubRepository)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: RoomGithubRepository)
+    fun insert(users: List<RoomGithubRepository>)
 
     @Query("SELECT * FROM RoomGithubRepository")
     fun getAll(): List<RoomGithubRepository>
 
     @Query("SELECT * FROM RoomGithubRepository WHERE userId = :userId LIMIT 1")
-    fun getByUserId(userId: String): RoomGithubRepository?
+    fun getByUserId(userId: Int): List<RoomGithubRepository>
 }
 
 

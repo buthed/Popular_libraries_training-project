@@ -18,6 +18,6 @@ interface UserDao {
     @Query("SELECT * FROM RoomGithubUser")
     fun getAll(): List<RoomGithubUser>
 
-    @Query("SELECT * FROM RoomGithubUser WHERE login = :login LIMIT 1" )
+    @Query("SELECT * FROM RoomGithubUser WHERE login = :login LIMIT 1")
     fun getByLogin(login: String): RoomGithubUser?
 }

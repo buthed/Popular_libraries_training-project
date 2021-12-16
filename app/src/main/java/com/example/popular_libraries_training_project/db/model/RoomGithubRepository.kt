@@ -15,8 +15,14 @@ import androidx.room.PrimaryKey
     ]
 )
 data class RoomGithubRepository(
-    @PrimaryKey val id: String,
+    @PrimaryKey val id: Int,
     val name: String,
-    val userId: String,
-    val forkCount: Int
+    val forks: Int,
+    val watchers: Int,
+    val createdAt: String,
+    val openIssues: Int,
+    val url: String,
+    val userId: Int,
 )
+
+

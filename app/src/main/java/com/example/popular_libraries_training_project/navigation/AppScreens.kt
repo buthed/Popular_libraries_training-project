@@ -1,10 +1,10 @@
 package com.example.popular_libraries_training_project.navigation
 
-import com.example.popular_libraries_training_project.domain.GithubReposRepository
-import com.example.popular_libraries_training_project.model.GithubReposModel
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.ui.repositories.RepositoriesFragment
-import com.example.popular_libraries_training_project.ui.repository_details.RepositoriesDetailsFragment
+import com.example.popular_libraries_training_project.ui.repository_details.RepositoryDetailsFragment
 import com.example.popular_libraries_training_project.ui.users.UsersFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
@@ -14,15 +14,15 @@ object AppScreens {
         UsersFragment()
     }
 
-    fun userRepositories(userName: GithubUserModel) = FragmentScreen {
-        RepositoriesFragment(userName)
+    fun userRepositories(userModel: GithubUserModel) = FragmentScreen {
+        RepositoriesFragment.newInstance(userModel)
     }
 
     fun repositoryDetails(
         user: GithubUserModel,
-        model: GithubReposModel,
-        repository: GithubReposRepository
+        model: GithubRepositoryModel,
+        repository: GithubRepositoryRepository
     ) = FragmentScreen {
-        RepositoriesDetailsFragment(user, model, repository)
+        RepositoryDetailsFragment(user, model, repository)
     }
 }

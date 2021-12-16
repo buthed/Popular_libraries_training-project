@@ -16,14 +16,15 @@ import com.example.popular_libraries_training_project.db.model.RoomGithubUser
     ],
     version = 1
 )
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract val userDao: UserDao
 
     abstract val repositoryDao: RepositoryDao
 
     companion object {
-        private const val  DB_Name = "database.db"
+
+        private const val DB_Name = "database.db"
 
         val instance by lazy {
             Room.databaseBuilder(App.instance, AppDatabase::class.java, DB_Name)
