@@ -1,19 +1,19 @@
 package com.example.popular_libraries_training_project.ui.repositories
 
 import android.util.Log
-import com.example.popular_libraries_training_project.domain.GithubReposRepository
-import com.example.popular_libraries_training_project.model.GithubReposModel
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
-import com.example.popular_libraries_training_project.screens.AppScreens
+import com.example.popular_libraries_training_project.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 class RepositoriesPresenter(
+    private val githubUserModel: GithubUserModel,
     private val router: Router,
-    private val githubReposRepository: GithubReposRepository,
-    private val githubUserModel: GithubUserModel
+    private val githubRepositoryRepository: GithubRepositoryRepository,
 ) : MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {
@@ -23,7 +23,7 @@ class RepositoriesPresenter(
     }
 
     private fun loadData() {
-        githubReposRepository.getRepositories(githubUserModel.reposUrl)
+        githubRepositoryRepository.getRepositories(githubUserModel)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
@@ -37,12 +37,12 @@ class RepositoriesPresenter(
                 })
     }
 
-    fun onReposClicked(reposModel: GithubReposModel) {
+    fun onReposClicked(repositoryModel: GithubRepositoryModel) {
         router.navigateTo(
             AppScreens.repositoryDetails(
                 githubUserModel,
-                reposModel,
-                githubReposRepository
+                repositoryModel,
+                githubRepositoryRepository
             )
         )
     }

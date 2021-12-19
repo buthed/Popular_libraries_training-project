@@ -7,29 +7,30 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.databinding.FragmentRepositoryDetailesBinding
-import com.example.popular_libraries_training_project.domain.GithubReposRepository
-import com.example.popular_libraries_training_project.model.GithubReposModel
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
 import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class RepositoriesDetailsFragment(
+class RepositoryDetailsFragment(
     private val user: GithubUserModel,
-    private val githubReposModel: GithubReposModel,
-    private val githubReposRepository: GithubReposRepository,
+    private val githubRepositoryModel: GithubRepositoryModel,
+    private val githubRepositoryRepository: GithubRepositoryRepository,
 ) : MvpAppCompatFragment(), RepositoryDetailsView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        RepositoriesDetailsPresenter(
+        RepositoryDetailsPresenter(
             App.instance.router,
-            githubReposModel,
-            githubReposRepository
+            githubRepositoryModel,
+            githubRepositoryRepository
         )
     }
 
     private val imageloader by lazy { GlideImageLoader() }
+
     private var _binding: FragmentRepositoryDetailesBinding? = null
     private val binding
         get() = _binding!!
@@ -55,7 +56,7 @@ class RepositoriesDetailsFragment(
         return true
     }
 
-    override fun updateRepository(repository: GithubReposModel) {
+    override fun updateRepository(repository: GithubRepositoryModel) {
         binding.repositoryName.text = repository.name
         binding.repositoryForks.text = "Forks:" + repository.forks.toString()
         binding.repositoryWatchers.text = "Watchers: " + repository.watchers.toString()
