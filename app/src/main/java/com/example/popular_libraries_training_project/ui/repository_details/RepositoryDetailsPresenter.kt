@@ -1,17 +1,17 @@
 package com.example.popular_libraries_training_project.ui.repository_details
 
 import android.util.Log
-import com.example.popular_libraries_training_project.domain.GithubReposRepository
-import com.example.popular_libraries_training_project.model.GithubReposModel
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class RepositoriesDetailsPresenter(
+class RepositoryDetailsPresenter(
     private val router: Router,
-    private val githubReposModel: GithubReposModel,
-    private val githubReposRepository: GithubReposRepository
+    private val githubRepositoryModel: GithubRepositoryModel,
+    private val githubRepositoryRepository: GithubRepositoryRepository
 ) : MvpPresenter<RepositoryDetailsView>() {
 
     override fun onFirstViewAttach() {
@@ -21,7 +21,7 @@ class RepositoriesDetailsPresenter(
     }
 
     private fun loadData() {
-        githubReposRepository.getRepository(githubReposModel.url)
+        githubRepositoryRepository.getRepository(githubRepositoryModel.url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
