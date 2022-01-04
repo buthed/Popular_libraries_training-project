@@ -1,0 +1,38 @@
+package com.example.popular_libraries_training_project.di.modules
+
+import com.example.popular_libraries_training_project.db.AppDatabase
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
+import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
+import com.example.popular_libraries_training_project.model.GithubRepositoryModel
+import com.example.popular_libraries_training_project.model.GithubUserModel
+import com.example.popular_libraries_training_project.remote.RetrofitService
+import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
+import dagger.Module
+import dagger.Provides
+import io.reactivex.rxjava3.core.Single
+
+@Module
+class RepositoryModule {
+
+    @Provides
+    fun getRepositories(
+        networkStatus: NetworkStatus,
+        retrofitService: RetrofitService,
+        db: AppDatabase,
+    ): GithubRepositoryRepository {
+        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, db)
+    }
+
+    @Provides
+    fun getRepository(
+        networkStatus: NetworkStatus,
+        retrofitService: RetrofitService,
+        db: AppDatabase,
+    ): GithubRepositoryRepository {
+        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, db)
+    }
+
+//    @Provides
+//    fun getUsers()//TODO
+
+}
