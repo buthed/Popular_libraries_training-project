@@ -13,6 +13,7 @@ import com.example.popular_libraries_training_project.db.AppDatabase
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
 import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
+import com.example.popular_libraries_training_project.navigation.AppScreens
 import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
@@ -31,7 +32,8 @@ class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButto
                 networkStatus = NetworkStatus(requireContext()),
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance,
-            )
+            ),
+            appScreens = TODO(),
         )
     }
 

@@ -5,13 +5,14 @@ import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
 class MainPresenter(
-    private val router: Router
+    private val router: Router,
+    private val appScreens: AppScreens
 ) : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        router.navigateTo(AppScreens.userScreen())
+        router.navigateTo(appScreens.userScreen())
     }
 
     fun backPressed() {

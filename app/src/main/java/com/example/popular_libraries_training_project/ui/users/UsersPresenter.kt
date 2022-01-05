@@ -11,7 +11,8 @@ import moxy.MvpPresenter
 
 class UsersPresenter(
     private val router: Router,
-    private val usersRepositories: GithubUsersRepositories
+    private val usersRepositories: GithubUsersRepositories,
+    private val appScreens: AppScreens,
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
@@ -36,7 +37,7 @@ class UsersPresenter(
     }
 
     fun onUserClicked(userModel: GithubUserModel) {
-        router.navigateTo(AppScreens.userRepositories(userModel))
+        router.navigateTo(appScreens.userRepositories(userModel))
     }
 
     fun backPressed(): Boolean {

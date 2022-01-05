@@ -33,7 +33,7 @@ class NetworkModule {
     }
 
     @Provides
-    private fun getGson(): Gson {
+   fun getGson(): Gson {
         return GsonBuilder()
             .excludeFieldsWithoutExposeAnnotation()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -41,7 +41,7 @@ class NetworkModule {
     }
 
     @Provides
-    private fun getRetrofit(
+    fun getRetrofit(
         @Named(BASE_URL) baseUrl: String,
         gson: Gson
     ): Retrofit {

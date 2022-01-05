@@ -11,7 +11,7 @@ class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
 
     private val navigator = AppNavigator(this, R.id.container)
 
-    private val presenter by moxyPresenter { MainPresenter(App.instance.router) }
+    private val presenter by moxyPresenter { MainPresenter(TODO(), TODO()) }
 
     override fun onResumeFragments() {
         super.onResumeFragments()

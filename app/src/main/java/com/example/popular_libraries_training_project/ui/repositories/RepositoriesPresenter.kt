@@ -14,6 +14,7 @@ class RepositoriesPresenter(
     private val githubUserModel: GithubUserModel,
     private val router: Router,
     private val githubRepositoryRepository: GithubRepositoryRepository,
+    private val appScreens: AppScreens,
 ) : MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {
@@ -39,7 +40,7 @@ class RepositoriesPresenter(
 
     fun onReposClicked(repositoryModel: GithubRepositoryModel) {
         router.navigateTo(
-            AppScreens.repositoryDetails(
+            appScreens.repositoryDetails(
                 githubUserModel,
                 repositoryModel,
                 githubRepositoryRepository
@@ -48,7 +49,7 @@ class RepositoriesPresenter(
     }
 
     fun backPressed(): Boolean {
-        router.backTo(AppScreens.userScreen())
+        router.backTo(appScreens.userScreen())
         return true
     }
 }
