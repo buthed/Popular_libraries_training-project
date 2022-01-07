@@ -23,10 +23,11 @@ class RepositoryDetailsFragment(
 
     private val presenter by moxyPresenter {
         RepositoryDetailsPresenter(
-            App.instance.router,
             githubRepositoryModel,
             githubRepositoryRepository
-        )
+        ).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private val imageloader by lazy { GlideImageLoader() }

@@ -9,13 +9,19 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class RepositoriesPresenter(
     private val githubUserModel: GithubUserModel,
-    private val router: Router,
-    private val githubRepositoryRepository: GithubRepositoryRepository,
-    private val appScreens: AppScreens,
-) : MvpPresenter<RepositoriesView>() {
+    private val githubRepositoryRepository: GithubRepositoryRepository
+): MvpPresenter<RepositoriesView>() {
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var appScreens: AppScreens
+
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

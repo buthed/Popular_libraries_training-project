@@ -14,7 +14,7 @@ class CicironeModule {
     private val cicerone: Cicerone<Router> by lazy { Cicerone.create() }
 
     @Provides
-    fun navigationHolder(): NavigatorHolder {
+    fun navigatorHolder(): NavigatorHolder {
         return cicerone.getNavigatorHolder()
     }
 

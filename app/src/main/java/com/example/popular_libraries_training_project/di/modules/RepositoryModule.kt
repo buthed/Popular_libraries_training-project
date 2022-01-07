@@ -3,6 +3,8 @@ package com.example.popular_libraries_training_project.di.modules
 import com.example.popular_libraries_training_project.db.AppDatabase
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
+import com.example.popular_libraries_training_project.domain.GithubUsersRepositories
+import com.example.popular_libraries_training_project.domain.GithubUsersRepositoriesImpl
 import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService
@@ -32,7 +34,14 @@ class RepositoryModule {
         return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, db)
     }
 
-//    @Provides
-//    fun getUsers()//TODO
+
+    @Provides
+    fun getUsers(
+        networkStatus: NetworkStatus,
+        retrofitService: RetrofitService,
+        db: AppDatabase,
+    ): GithubUsersRepositories {
+        return GithubUsersRepositoriesImpl(networkStatus, retrofitService, db)
+    }
 
 }

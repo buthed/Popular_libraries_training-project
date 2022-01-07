@@ -23,15 +23,9 @@ import moxy.ktx.moxyPresenter
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        UsersPresenter(
-            App.instance.router,
-            GithubUsersRepositoriesImpl(
-                networkStatus = status,
-                retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance,
-            ),
-            TODO()
-        )
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     private var _binding: FragmentUsersBinding? = null
