@@ -7,7 +7,9 @@ import com.example.popular_libraries_training_project.ui.repositories.Repositori
 import com.example.popular_libraries_training_project.ui.repository_details.RepositoryDetailsPresenter
 import com.example.popular_libraries_training_project.ui.users.UsersPresenter
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
         CacheModule::class,
