@@ -6,15 +6,19 @@ import com.example.popular_libraries_training_project.model.GithubRepositoryMode
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class RepositoriesPresenter(
-    private val githubUserModel: GithubUserModel,
+class RepositoriesPresenter @AssistedInject constructor(
     private val router: Router,
-    private val githubRepositoryRepository: GithubRepositoryRepository,
-) : MvpPresenter<RepositoriesView>() {
+    private val appScreens: AppScreens,
+    @Assisted private val githubUserModel: GithubUserModel,
+    @Assisted private val githubRepositoryRepository: GithubRepositoryRepository //TODO() recode to location Provider
+): MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -39,7 +43,7 @@ class RepositoriesPresenter(
 
     fun onReposClicked(repositoryModel: GithubRepositoryModel) {
         router.navigateTo(
-            AppScreens.repositoryDetails(
+            appScreens.repositoryDetails(
                 githubUserModel,
                 repositoryModel,
                 githubRepositoryRepository
@@ -48,7 +52,13 @@ class RepositoriesPresenter(
     }
 
     fun backPressed(): Boolean {
-        router.backTo(AppScreens.userScreen())
+        router.backTo(appScreens.userScreen())
         return true
     }
+}
+
+@AssistedFactory
+interface RepositoriesPresenterFactory {
+
+    fun presenter(githubUserModel: GithubUserModel, githubRepositoryRepository: GithubRepositoryRepository): RepositoriesPresenter
 }

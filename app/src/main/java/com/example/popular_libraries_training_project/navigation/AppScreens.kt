@@ -8,17 +8,29 @@ import com.example.popular_libraries_training_project.ui.repository_details.Repo
 import com.example.popular_libraries_training_project.ui.users.UsersFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-object AppScreens {
+interface AppScreens {
+    fun userScreen(): FragmentScreen
 
-    fun userScreen() = FragmentScreen {
+    fun userRepositories(userModel: GithubUserModel): FragmentScreen
+
+    fun repositoryDetails(
+        user: GithubUserModel,
+        model: GithubRepositoryModel,
+        repository: GithubRepositoryRepository
+    ): FragmentScreen
+}
+
+class AppScreensImpl: AppScreens {
+
+    override fun userScreen() = FragmentScreen {
         UsersFragment()
     }
 
-    fun userRepositories(userModel: GithubUserModel) = FragmentScreen {
+    override fun userRepositories(userModel: GithubUserModel) = FragmentScreen {
         RepositoriesFragment.newInstance(userModel)
     }
 
-    fun repositoryDetails(
+    override fun repositoryDetails(
         user: GithubUserModel,
         model: GithubRepositoryModel,
         repository: GithubRepositoryRepository

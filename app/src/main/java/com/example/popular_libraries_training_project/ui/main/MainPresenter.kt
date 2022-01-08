@@ -3,15 +3,17 @@ package com.example.popular_libraries_training_project.ui.main
 import com.example.popular_libraries_training_project.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class MainPresenter(
-    private val router: Router
-) : MvpPresenter<MainView>() {
+class MainPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreens: AppScreens,
+): MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        router.navigateTo(AppScreens.userScreen())
+        router.navigateTo(appScreens.userScreen())
     }
 
     fun backPressed() {

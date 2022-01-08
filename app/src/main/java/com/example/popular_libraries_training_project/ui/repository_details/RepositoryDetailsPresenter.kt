@@ -4,14 +4,17 @@ import android.util.Log
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
 import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class RepositoryDetailsPresenter(
-    private val router: Router,
-    private val githubRepositoryModel: GithubRepositoryModel,
-    private val githubRepositoryRepository: GithubRepositoryRepository
+class RepositoryDetailsPresenter @AssistedInject constructor(
+    @Assisted private val githubRepositoryModel: GithubRepositoryModel,
+    @Assisted private val githubRepositoryRepository: GithubRepositoryRepository,
+    private val router: Router
 ) : MvpPresenter<RepositoryDetailsView>() {
 
     override fun onFirstViewAttach() {
@@ -39,4 +42,9 @@ class RepositoryDetailsPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface RepositoryDetailsPresenterFactory{
+    fun presenter( githubRepositoryModel: GithubRepositoryModel,githubRepositoryRepository: GithubRepositoryRepository): RepositoryDetailsPresenter
 }

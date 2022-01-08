@@ -24,15 +24,11 @@ import moxy.ktx.moxyPresenter
 class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        RepositoriesPresenter(
-            router = App.instance.router,
-            githubUserModel = userModel!!,
-            githubRepositoryRepository = GithubRepositoryRepositoryImpl(
-                networkStatus = NetworkStatus(requireContext()),
-                retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance,
-            )
-        )
+        App.instance.appComponent.repositoriesPresenterFactory().presenter(userModel, GithubRepositoryRepositoryImpl(
+            networkStatus = NetworkStatus(requireContext()),
+            retrofitService = ApiHolder.retrofitService,
+            db = AppDatabase.instance,
+        ))
     }
 
     private val imageloader by lazy { GlideImageLoader() }
