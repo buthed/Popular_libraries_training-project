@@ -13,8 +13,9 @@ import javax.inject.Inject
 
 class RepositoriesPresenter(
     private val githubUserModel: GithubUserModel,
-    private val githubRepositoryRepository: GithubRepositoryRepository
+    private val githubRepositoryRepository: GithubRepositoryRepository //TODO() recode to location Provider
 ): MvpPresenter<RepositoriesView>() {
+
 
     @Inject
     lateinit var router: Router

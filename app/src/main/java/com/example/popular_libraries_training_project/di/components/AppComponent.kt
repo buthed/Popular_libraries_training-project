@@ -21,11 +21,14 @@ import javax.inject.Singleton
 )
 
 interface AppComponent {
+
+    fun mainPresenter(): MainPresenter
+
+    fun usersPresenter(): UsersPresenter
+
+    //fun repositoriesPresenter(): RepositoriesPresenter
+
     fun inject(mainActivity: MainActivity)
-
-    fun inject(mainPresenter: MainPresenter)
-
-    fun inject(usersPresenter: UsersPresenter)
 
     fun inject(repositoriesPresenter: RepositoriesPresenter)
 
