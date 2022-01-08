@@ -22,12 +22,7 @@ class RepositoryDetailsFragment(
 ) : MvpAppCompatFragment(), RepositoryDetailsView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        RepositoryDetailsPresenter(
-            githubRepositoryModel,
-            githubRepositoryRepository
-        ).apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.repositoryDetailsPresenterFactory().presenter(  githubRepositoryModel, githubRepositoryRepository)
     }
 
     private val imageloader by lazy { GlideImageLoader() }
