@@ -1,7 +1,6 @@
 package com.example.popular_libraries_training_project.ui.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.R
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener

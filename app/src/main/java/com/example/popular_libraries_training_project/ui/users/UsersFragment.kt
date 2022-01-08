@@ -9,10 +9,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.databinding.FragmentUsersBinding
-import com.example.popular_libraries_training_project.db.AppDatabase
-import com.example.popular_libraries_training_project.domain.GithubUsersRepositoriesImpl
 import com.example.popular_libraries_training_project.model.GithubUserModel
-import com.example.popular_libraries_training_project.remote.ApiHolder
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import com.example.popular_libraries_training_project.ui.base.BackButtonListener
 import com.example.popular_libraries_training_project.ui.imageloading.GlideImageLoader

@@ -12,7 +12,6 @@ import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
 class RepositoriesPresenter @AssistedInject constructor(
     private val router: Router,

@@ -62,5 +62,4 @@ class NetworkModule {
     fun networkStatus(context: Context): NetworkStatus {
         return NetworkStatus(context)
     }
-
 }

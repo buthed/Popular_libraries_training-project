@@ -1,8 +1,6 @@
 package com.example.popular_libraries_training_project.domain
 
-import androidx.room.Database
 import com.example.popular_libraries_training_project.db.AppDatabase
-import com.example.popular_libraries_training_project.db.model.RoomGithubRepository
 import com.example.popular_libraries_training_project.db.model.RoomGithubUser
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService

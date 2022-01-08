@@ -5,13 +5,10 @@ import com.example.popular_libraries_training_project.domain.GithubRepositoryRep
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositories
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositoriesImpl
-import com.example.popular_libraries_training_project.model.GithubRepositoryModel
-import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import dagger.Module
 import dagger.Provides
-import io.reactivex.rxjava3.core.Single
 
 @Module
 class RepositoryModule {
@@ -43,5 +40,4 @@ class RepositoryModule {
     ): GithubUsersRepositories {
         return GithubUsersRepositoriesImpl(networkStatus, retrofitService, db)
     }
-
 }

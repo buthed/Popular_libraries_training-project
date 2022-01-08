@@ -4,9 +4,6 @@ import android.app.Application
 import com.example.popular_libraries_training_project.di.components.AppComponent
 import com.example.popular_libraries_training_project.di.components.DaggerAppComponent
 import com.example.popular_libraries_training_project.di.modules.ContextModule
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
-import dagger.Component
 
 class App : Application() {
 

@@ -10,15 +10,12 @@ import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
 class RepositoryDetailsPresenter @AssistedInject constructor(
     @Assisted private val githubRepositoryModel: GithubRepositoryModel,
     @Assisted private val githubRepositoryRepository: GithubRepositoryRepository,
     private val router: Router
 ) : MvpPresenter<RepositoryDetailsView>() {
-
-
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

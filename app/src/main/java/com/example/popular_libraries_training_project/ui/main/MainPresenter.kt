@@ -10,8 +10,6 @@ class MainPresenter @Inject constructor(
     private val appScreens: AppScreens,
 ): MvpPresenter<MainView>() {
 
-
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
