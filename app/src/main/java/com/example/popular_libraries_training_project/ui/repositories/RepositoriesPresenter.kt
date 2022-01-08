@@ -6,23 +6,20 @@ import com.example.popular_libraries_training_project.model.GithubRepositoryMode
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.navigation.AppScreens
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class RepositoriesPresenter(
-    private val githubUserModel: GithubUserModel,
-    private val githubRepositoryRepository: GithubRepositoryRepository //TODO() recode to location Provider
+class RepositoriesPresenter @AssistedInject constructor(
+    private val router: Router,
+    private val appScreens: AppScreens,
+    @Assisted private val githubUserModel: GithubUserModel,
+    @Assisted private val githubRepositoryRepository: GithubRepositoryRepository //TODO() recode to location Provider
 ): MvpPresenter<RepositoriesView>() {
-
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var appScreens: AppScreens
-
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -59,4 +56,10 @@ class RepositoriesPresenter(
         router.backTo(appScreens.userScreen())
         return true
     }
+}
+
+@AssistedFactory
+interface RepositoriesPresenterFactory {
+
+    fun presenter(githubUserModel: GithubUserModel, githubRepositoryRepository: GithubRepositoryRepository): RepositoriesPresenter
 }
