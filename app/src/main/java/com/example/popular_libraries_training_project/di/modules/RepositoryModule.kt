@@ -1,6 +1,8 @@
 package com.example.popular_libraries_training_project.di.modules
 
-import com.example.popular_libraries_training_project.db.AppDatabase
+import com.example.popular_libraries_training_project.GithubUsersRepositoriesCache
+import com.example.popular_libraries_training_project.cache.GithubRepositoryCache
+import com.example.popular_libraries_training_project.cache.db.AppDatabase
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositories
@@ -17,18 +19,18 @@ class RepositoryModule {
     fun getRepositories(
         networkStatus: NetworkStatus,
         retrofitService: RetrofitService,
-        db: AppDatabase,
+        repositoryCache: GithubRepositoryCache,
     ): GithubRepositoryRepository {
-        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, db)
+        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
     }
 
     @Provides
     fun getRepository(
         networkStatus: NetworkStatus,
         retrofitService: RetrofitService,
-        db: AppDatabase,
+        repositoryCache: GithubRepositoryCache,
     ): GithubRepositoryRepository {
-        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, db)
+        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
     }
 
 
@@ -36,8 +38,8 @@ class RepositoryModule {
     fun getUsers(
         networkStatus: NetworkStatus,
         retrofitService: RetrofitService,
-        db: AppDatabase,
+        usersCache: GithubUsersRepositoriesCache,
     ): GithubUsersRepositories {
-        return GithubUsersRepositoriesImpl(networkStatus, retrofitService, db)
+        return GithubUsersRepositoriesImpl(networkStatus, retrofitService, usersCache)
     }
 }

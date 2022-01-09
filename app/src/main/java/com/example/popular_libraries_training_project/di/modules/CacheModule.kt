@@ -2,7 +2,9 @@ package com.example.popular_libraries_training_project.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.example.popular_libraries_training_project.db.AppDatabase
+import com.example.popular_libraries_training_project.GithubUsersRepositoriesCache
+import com.example.popular_libraries_training_project.cache.GithubRepositoryCache
+import com.example.popular_libraries_training_project.cache.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,4 +19,20 @@ class CacheModule {
     fun db(context: Context): AppDatabase = Room
         .databaseBuilder(context, AppDatabase::class.java, DB_Name)
         .build()
+
+    @Singleton
+    @Provides
+    fun repositoryCache(
+        db: AppDatabase
+    ): GithubRepositoryCache{
+        return GithubRepositoryCache(db)
+    }
+
+    @Singleton
+    @Provides
+    fun userCache(
+        db: AppDatabase
+    ): GithubUsersRepositoriesCache{
+        return GithubUsersRepositoriesCache(db)
+    }
 }
