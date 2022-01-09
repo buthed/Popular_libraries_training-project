@@ -5,6 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.popular_libraries_training_project.db.model.RoomGithubRepository
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface RepositoryDao {
@@ -12,12 +14,12 @@ interface RepositoryDao {
 //    fun insert(user: RoomGithubRepository)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(users: List<RoomGithubRepository>)
+    fun insert(users: List<RoomGithubRepository>): Completable
 
     @Query("SELECT * FROM RoomGithubRepository")
-    fun getAll(): List<RoomGithubRepository>
+    fun getAll(): Single<List<RoomGithubRepository>>
 
     @Query("SELECT * FROM RoomGithubRepository WHERE userId = :userId LIMIT 1")
-    fun getByUserId(userId: Int): List<RoomGithubRepository>
+    fun getByUserId(userId: Int): Single<List<RoomGithubRepository>>
 }
 

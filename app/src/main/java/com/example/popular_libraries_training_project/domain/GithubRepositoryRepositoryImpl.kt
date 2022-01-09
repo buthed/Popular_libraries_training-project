@@ -8,6 +8,7 @@ import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.functions.Supplier
 
 class GithubRepositoryRepositoryImpl(
     private val networkStatus: NetworkStatus,
@@ -19,8 +20,7 @@ class GithubRepositoryRepositoryImpl(
         return if (networkStatus.isOnline())  {
             retrofitService.getRepositories(userModel.reposUrl)
                 .flatMap { repos ->
-                    Single.fromCallable {
-                        val dbRepos = repos.map {
+                    val dbRepos = repos.map {
                             RoomGithubRepository(
                                 it.id,
                                 it.name,
@@ -32,26 +32,24 @@ class GithubRepositoryRepositoryImpl(
                                 it.owner.id
                             )
                         }
-                        db.repositoryDao.insert(dbRepos)
-                        repos
-                    }
+                    db.repositoryDao.insert(dbRepos)
+                        .toSingle{ repos }
                 }
         } else {
-            Single.fromCallable {
-                db.repositoryDao.getByUserId(userModel.id)
-                    .map {
+            db.repositoryDao.getByUserId(userModel.id)
+                .map { list->
+                    list.map { repo ->
                         GithubRepositoryModel(
-                            it.id,
-                            it.name,
-                            it.forks,
-                            it.watchers,
-                            it.createdAt,
-                            it.openIssues,
-                            it.url,
-                            GithubRepoOwner(it.userId)
-                        )
-                    }
-            }
+                        repo.id,
+                        repo.name,
+                        repo.forks,
+                        repo.watchers,
+                        repo.createdAt,
+                        repo.openIssues,
+                        repo.url,
+                        GithubRepoOwner(repo.userId)
+                    ) }
+                }
         }
     }
 
