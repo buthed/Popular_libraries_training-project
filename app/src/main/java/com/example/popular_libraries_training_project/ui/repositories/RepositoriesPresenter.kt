@@ -17,7 +17,7 @@ class RepositoriesPresenter @AssistedInject constructor(
     private val router: Router,
     private val appScreens: AppScreens,
     @Assisted private val githubUserModel: GithubUserModel,
-    @Assisted private val githubRepositoryRepository: GithubRepositoryRepository //TODO() recode to location Provider
+    @Assisted private val githubRepositoryRepository: GithubRepositoryRepository
 ): MvpPresenter<RepositoriesView>() {
 
     override fun onFirstViewAttach() {

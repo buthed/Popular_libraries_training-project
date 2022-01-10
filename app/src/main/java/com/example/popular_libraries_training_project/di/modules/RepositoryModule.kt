@@ -9,37 +9,52 @@ import com.example.popular_libraries_training_project.domain.GithubUsersReposito
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositoriesImpl
 import com.example.popular_libraries_training_project.remote.RetrofitService
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-class RepositoryModule {
+abstract class RepositoryModule {
 
-    @Provides
-    fun getRepositories(
-        networkStatus: NetworkStatus,
-        retrofitService: RetrofitService,
-        repositoryCache: GithubRepositoryCache,
-    ): GithubRepositoryRepository {
-        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
-    }
+    @Singleton
+    @Binds
+    abstract fun bindUsersRepository(impl: GithubUsersRepositoriesImpl): GithubUsersRepositories
 
-    @Provides
-    fun getRepository(
-        networkStatus: NetworkStatus,
-        retrofitService: RetrofitService,
-        repositoryCache: GithubRepositoryCache,
-    ): GithubRepositoryRepository {
-        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
-    }
+    @Singleton
+    @Binds
+    abstract fun bindRepoRepository(impl: GithubRepositoryRepositoryImpl): GithubRepositoryRepository
 
-
-    @Provides
-    fun getUsers(
-        networkStatus: NetworkStatus,
-        retrofitService: RetrofitService,
-        usersCache: GithubUsersRepositoriesCache,
-    ): GithubUsersRepositories {
-        return GithubUsersRepositoriesImpl(networkStatus, retrofitService, usersCache)
-    }
 }
+//OLD
+//@Module
+//class RepositoryModule {
+//
+//    @Provides
+//    fun getRepositories(
+//        networkStatus: NetworkStatus,
+//        retrofitService: RetrofitService,
+//        repositoryCache: GithubRepositoryCache,
+//    ): GithubRepositoryRepository {
+//        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
+//    }
+//
+//    @Provides
+//    fun getRepository(
+//        networkStatus: NetworkStatus,
+//        retrofitService: RetrofitService,
+//        repositoryCache: GithubRepositoryCache,
+//    ): GithubRepositoryRepository {
+//        return GithubRepositoryRepositoryImpl(networkStatus, retrofitService, repositoryCache)
+//    }
+//
+//
+//    @Provides
+//    fun getUsers(
+//        networkStatus: NetworkStatus,
+//        retrofitService: RetrofitService,
+//        usersCache: GithubUsersRepositoriesCache,
+//    ): GithubUsersRepositories {
+//        return GithubUsersRepositoriesImpl(networkStatus, retrofitService, usersCache)
+//    }
+//}

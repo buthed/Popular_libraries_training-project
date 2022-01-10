@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popular_libraries_training_project.App
+import com.example.popular_libraries_training_project.cache.GithubRepositoryCache
 import com.example.popular_libraries_training_project.databinding.FragmentRepositoriesBinding
 import com.example.popular_libraries_training_project.cache.db.AppDatabase
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
@@ -27,7 +28,7 @@ class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButto
         App.instance.appComponent.repositoriesPresenterFactory().presenter(userModel, GithubRepositoryRepositoryImpl(
             networkStatus = NetworkStatus(requireContext()),
             retrofitService = ApiHolder.retrofitService,
-            repositoryCache = TODO(),
+            repositoryCache = GithubRepositoryCache(db = AppDatabase.instance),
         ))
     }
 
