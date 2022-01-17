@@ -1,6 +1,7 @@
 package com.example.popular_libraries_training_project.ui.repositories
 
 import android.util.Log
+import com.example.popular_libraries_training_project.di.scope.containers.ReposScopeContainer
 import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
 import com.example.popular_libraries_training_project.model.GithubRepositoryModel
 import com.example.popular_libraries_training_project.model.GithubUserModel
@@ -16,6 +17,7 @@ import moxy.MvpPresenter
 class RepositoriesPresenter @AssistedInject constructor(
     private val router: Router,
     private val appScreens: AppScreens,
+    private val reposScopeContainer: ReposScopeContainer,
     @Assisted private val githubUserModel: GithubUserModel,
     @Assisted private val githubRepositoryRepository: GithubRepositoryRepository
 ): MvpPresenter<RepositoriesView>() {
@@ -24,6 +26,11 @@ class RepositoriesPresenter @AssistedInject constructor(
         super.onFirstViewAttach()
 
         loadData()
+    }
+
+    override fun onDestroy() {
+        reposScopeContainer.destroyRepoSubcomponent()
+        super.onDestroy()
     }
 
     private fun loadData() {

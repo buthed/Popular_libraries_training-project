@@ -25,7 +25,8 @@ import moxy.ktx.moxyPresenter
 class RepositoriesFragment : MvpAppCompatFragment(), RepositoriesView, BackButtonListener {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.repositoriesPresenterFactory().presenter(userModel, GithubRepositoryRepositoryImpl(
+        App.instance.initRepoSubcomponent()
+        App.instance.repoSubcomponent!!.repositoriesPresenterFactory().presenter(userModel, GithubRepositoryRepositoryImpl(
             networkStatus = NetworkStatus(requireContext()),
             retrofitService = ApiHolder.retrofitService,
             repositoryCache = GithubRepositoryCache(db = AppDatabase.instance),

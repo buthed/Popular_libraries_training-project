@@ -1,4 +1,4 @@
-package com.example.popular_libraries_training_project
+package com.example.popular_libraries_training_project.cache
 
 import com.example.popular_libraries_training_project.cache.db.AppDatabase
 import com.example.popular_libraries_training_project.cache.db.model.RoomGithubUser

@@ -1,30 +1,34 @@
 package com.example.popular_libraries_training_project.di.modules
 
-import com.example.popular_libraries_training_project.GithubUsersRepositoriesCache
+import com.example.popular_libraries_training_project.App
 import com.example.popular_libraries_training_project.cache.GithubRepositoryCache
 import com.example.popular_libraries_training_project.cache.db.AppDatabase
-import com.example.popular_libraries_training_project.domain.GithubRepositoryRepository
-import com.example.popular_libraries_training_project.domain.GithubRepositoryRepositoryImpl
+import com.example.popular_libraries_training_project.di.scope.RepositoryScope
+import com.example.popular_libraries_training_project.di.scope.containers.ReposScopeContainer
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositories
 import com.example.popular_libraries_training_project.domain.GithubUsersRepositoriesImpl
-import com.example.popular_libraries_training_project.remote.RetrofitService
-import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-abstract class RepositoryModule {
+abstract class GithubRepoModule {
 
-    @Singleton
+    @RepositoryScope
     @Binds
     abstract fun bindUsersRepository(impl: GithubUsersRepositoriesImpl): GithubUsersRepositories
 
-    @Singleton
-    @Binds
-    abstract fun bindRepoRepository(impl: GithubRepositoryRepositoryImpl): GithubRepositoryRepository
+    companion object {
+        @RepositoryScope
+        @Provides
+        fun repoCache(db: AppDatabase): GithubRepositoryCache {
+            return GithubRepositoryCache(db)
+        }
 
+        @RepositoryScope
+        @Provides
+        fun scopeContainer(app: App): ReposScopeContainer = app
+    }
 }
 //OLD
 //@Module

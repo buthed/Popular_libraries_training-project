@@ -2,7 +2,7 @@ package com.example.popular_libraries_training_project.di.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.example.popular_libraries_training_project.GithubUsersRepositoriesCache
+import com.example.popular_libraries_training_project.cache.GithubUsersRepositoriesCache
 import com.example.popular_libraries_training_project.cache.GithubRepositoryCache
 import com.example.popular_libraries_training_project.cache.db.AppDatabase
 import dagger.Module
@@ -12,7 +12,7 @@ import javax.inject.Singleton
 private const val DB_Name = "database.db"
 
 @Module
-class CacheModule {
+class DbModule {
 
     @Singleton
     @Provides
@@ -28,11 +28,5 @@ class CacheModule {
         return GithubRepositoryCache(db)
     }
 
-    @Singleton
-    @Provides
-    fun userCache(
-        db: AppDatabase
-    ): GithubUsersRepositoriesCache{
-        return GithubUsersRepositoriesCache(db)
-    }
+
 }

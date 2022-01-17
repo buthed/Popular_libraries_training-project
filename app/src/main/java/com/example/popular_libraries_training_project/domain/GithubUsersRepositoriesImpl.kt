@@ -1,8 +1,6 @@
 package com.example.popular_libraries_training_project.domain
 
-import com.example.popular_libraries_training_project.GithubUsersRepositoriesCache
-import com.example.popular_libraries_training_project.cache.db.AppDatabase
-import com.example.popular_libraries_training_project.cache.db.model.RoomGithubUser
+import com.example.popular_libraries_training_project.cache.GithubUsersRepositoriesCache
 import com.example.popular_libraries_training_project.model.GithubUserModel
 import com.example.popular_libraries_training_project.remote.RetrofitService
 import com.example.popular_libraries_training_project.remote.connectivity.NetworkStatus
