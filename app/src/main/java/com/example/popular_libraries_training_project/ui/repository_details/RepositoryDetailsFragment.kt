@@ -61,7 +61,7 @@ class RepositoryDetailsFragment(
 
     override fun showLoading() {
         binding.loadingViewRepositoryDetails.isVisible = true
-        binding.repositoryName.isVisible = false //TODO
+        binding.repositoryName.isVisible = false
     }
 
     override fun hideLoading() {

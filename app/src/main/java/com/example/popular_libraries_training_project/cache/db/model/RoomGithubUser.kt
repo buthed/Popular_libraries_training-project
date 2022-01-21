@@ -1,4 +1,4 @@
-package com.example.popular_libraries_training_project.db.model
+package com.example.popular_libraries_training_project.cache.db.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

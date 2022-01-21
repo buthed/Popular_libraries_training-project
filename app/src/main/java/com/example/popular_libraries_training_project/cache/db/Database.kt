@@ -1,13 +1,13 @@
-package com.example.popular_libraries_training_project.db
+package com.example.popular_libraries_training_project.cache.db
 
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.popular_libraries_training_project.App
-import com.example.popular_libraries_training_project.db.dao.RepositoryDao
-import com.example.popular_libraries_training_project.db.dao.UserDao
-import com.example.popular_libraries_training_project.db.model.RoomGithubRepository
-import com.example.popular_libraries_training_project.db.model.RoomGithubUser
+import com.example.popular_libraries_training_project.cache.db.dao.RepositoryDao
+import com.example.popular_libraries_training_project.cache.db.dao.UserDao
+import com.example.popular_libraries_training_project.cache.db.model.RoomGithubRepository
+import com.example.popular_libraries_training_project.cache.db.model.RoomGithubUser
 
 @Database(
     entities = [

@@ -3,32 +3,27 @@ package com.example.popular_libraries_training_project.di.components
 import com.example.popular_libraries_training_project.di.modules.*
 import com.example.popular_libraries_training_project.ui.main.MainActivity
 import com.example.popular_libraries_training_project.ui.main.MainPresenter
-import com.example.popular_libraries_training_project.ui.repositories.RepositoriesPresenterFactory
 import com.example.popular_libraries_training_project.ui.repository_details.RepositoryDetailsPresenterFactory
-import com.example.popular_libraries_training_project.ui.users.UsersPresenter
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        CacheModule::class,
+        DbModule::class,
         CicironeModule::class,
-        ContextModule::class,
-        NetworkModule::class,
-        RepositoryModule::class
+        AppModule::class,
+        NetworkModule::class
     ]
 )
 
 interface AppComponent {
 
+    fun userSubcomponent(): GithubUsersSubcomponent
+
     fun mainPresenter(): MainPresenter
 
-    fun usersPresenter(): UsersPresenter
-
-    fun repositoriesPresenterFactory(): RepositoriesPresenterFactory
-
-    fun repositoryDetailsPresenterFactory(): RepositoryDetailsPresenterFactory
+    //fun repositoryDetailsPresenterFactory(): RepositoryDetailsPresenterFactory
 
     fun inject(mainActivity: MainActivity)
 }
